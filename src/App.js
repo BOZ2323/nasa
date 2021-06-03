@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+
+const API_KEY = 'kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP'
+
 
 function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    try {
+      const response = await fetch(
+        `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setData(data)
+    } catch {
+      console.log("API request failed");
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main><section><img src={data.hdurl} alt=""/></section></main>
   );
 }
 
