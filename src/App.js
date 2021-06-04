@@ -12,7 +12,8 @@ function App() {
 
   const getData = async () => {
     try {
-      const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+      // const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+      const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=2017-07-08&end_date=2017-07-10`);
       const data = await response.json();
       console.log("response", data);
       setData(data);
@@ -23,8 +24,10 @@ function App() {
   };
   return (
     <>
-      {data && <DailySpacePic data={data} />}
-      {/* <img src={data.hdurl} alt="pic"/> */}
+      {/* {data && <DailySpacePic data={data} />} */}
+      {data?.map((data) => (
+            <DailySpacePic data={data} key={data.title} />
+          ))}
     </>
   );
 }
