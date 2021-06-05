@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from "react";
 import DailySpacePic from "./components/DailySpacePic";
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css';
+import "react-calendar/dist/Calendar.css";
+import styled from "styled-components";
+
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: lightblue;
+  align-items: center
+`;
+const StyledSection = styled.section`
+align-item
+  background: lightblue;
+`;
 
 const API_KEY = "kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP";
 
@@ -11,7 +24,7 @@ function App() {
 
   useEffect(() => {
     getData();
-  },[date]);
+  }, [date]);
 
   const getData = async () => {
     try {
@@ -20,9 +33,7 @@ function App() {
       // const response = await fetch(
       //   `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=2017-07-08&end_date=2017-07-10`
       // );
-      const response = await fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${DATE}`
-      );
+      const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${DATE}`);
       const data = await response.json();
       console.log("response", data);
       setData(data);
@@ -30,23 +41,29 @@ function App() {
       console.log("API request failed");
     }
   };
+  const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
+  // const DATE = date.toISOString().substring(0, 10);
+  console.log("DATE:", DATE);
 
-  const DATE = date.toISOString().substring(0, 10)
-  console.log("DATE:", DATE)
   
-  console.log(data)
+
+  console.log(data);
+  console.log("DATE",DATE);
+  
+  console.log("date", date);
   // console.log(date.toISOString())
   // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
 
   return (
-    <>
+    <StyledMain>
+    <Calendar onChange={setDate} value={date} />
       {data && <DailySpacePic data={data} />}
       {/* {data?.map((data) => (
         <DailySpacePic data={data} key={data.title} />
       ))} */}
-      <Calendar onChange={setDate} value={date} />
       {/* <Calendar onChange={handleOnChange} showWeekNumbers value={value} /> */}
-    </>
+    </StyledMain>
   );
 }
 

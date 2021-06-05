@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from "react";
 import DailySpacePic from "./components/DailySpacePic";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import styled from "styled-components";
+import DatePicker from 'react-date-picker'
+
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: lightblue;
+  align-items: center
+`;
+const StyledSection = styled.section`
+align-item
+  background: lightblue;
+`;
 
 const API_KEY = "kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP";
 
 function App() {
   const [data, setData] = useState();
+  // const [date, setDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
@@ -43,14 +57,14 @@ function App() {
   // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
 
   return (
-    <>
+    <StyledMain>
+    <DatePicker onChange={setDate} value={date} />
       {data && <DailySpacePic data={data} />}
       {/* {data?.map((data) => (
         <DailySpacePic data={data} key={data.title} />
       ))} */}
-      <Calendar onChange={setDate} value={date} />
       {/* <Calendar onChange={handleOnChange} showWeekNumbers value={value} /> */}
-    </>
+    </StyledMain>
   );
 }
 
