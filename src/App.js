@@ -23,6 +23,8 @@ function App() {
   // const [date, setDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
 
+  console.log("newDate()", new Date())
+
   useEffect(() => {
     getData();
   }, [date]);
@@ -59,7 +61,7 @@ function App() {
       <StyledMain>
         <Title />
         <StyledSection>
-          <DatePicker maxDate={new Date()} onChange={setDate} value={date} />
+          <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />
         </StyledSection>
         {data && <DailySpacePic data={data} />}
         {/* {data?.map((data) => (
