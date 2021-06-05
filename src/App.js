@@ -59,7 +59,7 @@ function App() {
       <StyledMain>
         <Title />
         <StyledSection>
-          <DatePicker onChange={setDate} value={date} />
+          <DatePicker maxDate={new Date()} onChange={setDate} value={date} />
         </StyledSection>
         {data && <DailySpacePic data={data} />}
         {/* {data?.map((data) => (
