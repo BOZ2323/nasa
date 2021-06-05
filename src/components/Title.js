@@ -17,11 +17,11 @@ color: white;
 font-size: 1rem;
 `
 
-const Title = () => {
+const Title = ({showWeeklySpacePic}) => {
   return (
     <StyledWrapper>
       <StyledTitle>NASA</StyledTitle>
-      <StyledSubtitle>Space picture of the day</StyledSubtitle>
+      <StyledSubtitle>{showWeeklySpacePic ? "Weekly" : "Daily"}</StyledSubtitle>
     </StyledWrapper>
   );
 };

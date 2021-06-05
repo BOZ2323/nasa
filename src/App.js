@@ -31,7 +31,8 @@ const API_KEY = "kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP";
 function App() {
   const [data, setData] = useState();
   const [date, setDate] = useState(new Date());
-  const [seven, setSeven] = useState([]);
+
+  const [weekdays, setWeekdays] = useState([]);
   const [showWeeklySpacePic, setShowWeeklySpacePic] = useState(false);
 
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
@@ -44,14 +45,14 @@ function App() {
 
   useEffect(() => {
     getData();
-    getAWeekAgoDate();
+    getAWeekAgoDate(); // call this on the button
   }, [date]);
 
   console.log("DATE:", DATE);
   console.log(data);
 
   console.log("date", date);
-  console.log("seven", seven);
+  console.log("weekdays", weekdays);
   // console.log(date.toISOString())
   // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
 
@@ -74,7 +75,7 @@ function App() {
       const sevenPics = await responseWeekdaysPics.json();
       console.log("response", data);
       setData(data);
-      setSeven(sevenPics);
+      setWeekdays(sevenPics);
     } catch {
       console.log("API request failed");
     }
@@ -83,23 +84,21 @@ function App() {
   return (
     <>
       <StyledMain>
-        <Title />
-        <StyledSection>
-          <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />
-        </StyledSection>
+        <Title showWeeklySpacePic={showWeeklySpacePic}/>
 
-        <StyledButton onClick={() => setShowWeeklySpacePic(!showWeeklySpacePic)}></StyledButton>
-        {showWeeklySpacePic && seven?.map((seven) => (
-        <LastWeeksPics seven={seven} key={seven.title} />
+        <StyledButton onClick={() => setShowWeeklySpacePic(!showWeeklySpacePic)}>{showWeeklySpacePic ? "Choose your special date" : "View this weeks pics"}</StyledButton>
+        {showWeeklySpacePic && weekdays?.map((weekday) => (
+        <LastWeeksPics weekday={weekday} key={weekday.title} />
       ))}
 
+        <StyledSection>
+          {!showWeeklySpacePic && <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />}
+        </StyledSection>
         {!showWeeklySpacePic && data && <DailySpacePic data={data} />}
 
-        {/* {seven?.map((seven) => (
-        <LastWeeksPics seven={seven} key={seven.title} />
-      ))} */}
+        
 
-        {/* <Calendar onChange={handleOnChange} showWeekNumbers value={value} /> */}
+      
       </StyledMain>
       <BackgroundPic />
     </>

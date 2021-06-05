@@ -19,12 +19,12 @@ const StyledText = styled.article`
   color: grey;
 `;
 
-const LastWeeksPics = ({seven}) => {
+const LastWeeksPics = ({weekday}) => {
     return (
         <StyledWrapper>
-        <StyledText>{seven.explanation}</StyledText>
+        <StyledText>{weekday.explanation}</StyledText>
         <StyledBox>
-          <StyledImage src={seven.hdurl} alt={seven.explanation} />
+          <StyledImage src={weekday.hdurl} alt={weekday.explanation} />
         </StyledBox>
       </StyledWrapper>
     )
