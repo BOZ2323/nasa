@@ -3,11 +3,9 @@ import styled from "styled-components";
 
 const StyledWrapper = styled.section`
   display: flex;
-  background: papayawhip;
 `;
 const StyledBox = styled.div`
   padding: 4em;
-  background: papayawhip;
 `;
 const StyledImage = styled.img`
   width: 200px;

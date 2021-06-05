@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
+import Title from "./components/Title";
+import BackgroundPic from "./components/BackgroundPic";
 import DailySpacePic from "./components/DailySpacePic";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
-import DatePicker from 'react-date-picker'
+import DatePicker from "react-date-picker";
 
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: lightblue;
-  align-items: center
+  align-items: center;
 `;
 const StyledSection = styled.section`
-align-item
   background: lightblue;
 `;
 
@@ -47,24 +47,28 @@ function App() {
   // const DATE = date.toISOString().substring(0, 10);
   console.log("DATE:", DATE);
 
-  
-
   console.log(data);
-  console.log("DATE",DATE);
-  
+  console.log("DATE", DATE);
+
   console.log("date", date);
   // console.log(date.toISOString())
   // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
 
   return (
-    <StyledMain>
-    <DatePicker onChange={setDate} value={date} />
-      {data && <DailySpacePic data={data} />}
-      {/* {data?.map((data) => (
+    <>
+      <StyledMain>
+        <Title />
+        <StyledSection>
+          <DatePicker onChange={setDate} value={date} />
+        </StyledSection>
+        {data && <DailySpacePic data={data} />}
+        {/* {data?.map((data) => (
         <DailySpacePic data={data} key={data.title} />
       ))} */}
-      {/* <Calendar onChange={handleOnChange} showWeekNumbers value={value} /> */}
-    </StyledMain>
+        {/* <Calendar onChange={handleOnChange} showWeekNumbers value={value} /> */}
+      </StyledMain>
+      <BackgroundPic />
+    </>
   );
 }
 
