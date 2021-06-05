@@ -23,11 +23,46 @@ function App() {
   // const [date, setDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
 
+  const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
+  // const DATE = date.toISOString().substring(0, 10);
+  const LAST_WEEK = getLastWeek();
+  console.log("LAST_WEEK", LAST_WEEK)
+
+  const datetzoffset = new Date(date.getTime() - tzoffset)
+
+
+
   console.log("newDate()", new Date())
 
   useEffect(() => {
     getData();
+    getLastWeek();
   }, [date]);
+
+
+  
+
+  
+  
+
+  console.log("DATE:", DATE);
+  console.log(data);
+
+
+  console.log("date", date);
+  // console.log(date.toISOString())
+  // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
+
+  function getLastWeek() {
+    const today = new Date(date.getTime() - tzoffset);
+    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+    console.log("today", today)
+    return lastWeek;
+  }
+  
+
+   
 
   const getData = async () => {
     try {
@@ -44,17 +79,10 @@ function App() {
       console.log("API request failed");
     }
   };
-  const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
-  // const DATE = date.toISOString().substring(0, 10);
-  console.log("DATE:", DATE);
 
-  console.log(data);
-  console.log("DATE", DATE);
+  
 
-  console.log("date", date);
-  // console.log(date.toISOString())
-  // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
+
 
   return (
     <>
