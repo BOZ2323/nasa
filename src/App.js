@@ -29,12 +29,13 @@ const StyledButton = styled.button`
 const API_KEY = "kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP";
 
 function App() {
-  const [data, setData] = useState();
+  const [dailyData, setDailyData] = useState();
   const [date, setDate] = useState(new Date());
 
-  const [weekdays, setWeekdays] = useState([]);
+  const [weekdays, setWeekdays] = useState([]); //last seven weekdays pics
   const [showWeeklySpacePic, setShowWeeklySpacePic] = useState(false);
 
+  // get today's date, taking the different timezone into account
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
   const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
   // const DATE = date.toISOString().substring(0, 10);
@@ -44,61 +45,77 @@ function App() {
   console.log("newDate()", new Date());
 
   useEffect(() => {
-    getData();
-    getAWeekAgoDate(); // call this on the button
+    getDailyData();
+    getWeeklyData();
+    // getAWeekAgoDate(); // call this on the button
   }, [date]);
 
   console.log("DATE:", DATE);
-  console.log(data);
 
   console.log("date", date);
+  console.log("date.getTime()", date.getTime());
+  console.log("newDate().getTime()", new Date().getTime());
   console.log("weekdays", weekdays);
+  const reversedWeekdays = weekdays.reverse();
+  console.log("reversedWeekdays", reversedWeekdays.reverse());
+
   // console.log(date.toISOString())
   // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
 
   function getAWeekAgoDate() {
-    const today = new Date(date.getTime() - tzoffset);
+    const today = new Date(new Date().getTime() - tzoffset);
     const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5); // why 5, figure out before uploading
     console.log("today", today);
     return lastWeek;
   }
 
-  const getData = async () => {
+  const getDailyData = async () => {
     try {
-      // const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
-
-      const responseWeekdaysPics = await fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${SEVEN_DAYS_AGO}`
-      );
       const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${DATE}`);
       const data = await response.json();
-      const sevenPics = await responseWeekdaysPics.json();
-      console.log("response", data);
-      setData(data);
-      setWeekdays(sevenPics);
+
+      console.log("daily response", data);
+      setDailyData(data);
     } catch {
-      console.log("API request failed");
+      console.log("API request for daily pics failed");
+    }
+  };
+
+  const getWeeklyData = async () => {
+    try {
+      const response = await fetch(
+        `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${SEVEN_DAYS_AGO}`
+      );
+      const data = await response.json();
+
+      const reversedData = data.reverse();
+      console.log("reversedData", reversedData);
+
+      setWeekdays(reversedData);
+    } catch {
+      console.log("API request for weekly pics failed");
     }
   };
 
   return (
     <>
       <StyledMain>
-        <Title showWeeklySpacePic={showWeeklySpacePic}/>
+        <Title showWeeklySpacePic={showWeeklySpacePic} />
 
-        <StyledButton onClick={() => setShowWeeklySpacePic(!showWeeklySpacePic)}>{showWeeklySpacePic ? "Choose your special date" : "View this weeks pics"}</StyledButton>
-        {showWeeklySpacePic && weekdays?.map((weekday) => (
-        <LastWeeksPics weekday={weekday} key={weekday.title} />
-      ))}
+        <StyledButton onClick={() => setShowWeeklySpacePic(!showWeeklySpacePic)}>
+          {showWeeklySpacePic ? "Choose your special date" : "View this weeks pics"}
+        </StyledButton>
+        {showWeeklySpacePic &&
+          weekdays?.map((weekday) => (
+            <LastWeeksPics getWeekAgoDate={() => getAWeekAgoDate()} weekday={weekday} key={weekday.title} />
+          ))}
 
         <StyledSection>
-          {!showWeeklySpacePic && <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />}
+          {!showWeeklySpacePic && (
+            <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />
+          )}
         </StyledSection>
-        {!showWeeklySpacePic && data && <DailySpacePic data={data} />}
-
-        
-
-      
+        {!showWeeklySpacePic && dailyData && <DailySpacePic dailyData={dailyData} />}
       </StyledMain>
       <BackgroundPic />
     </>

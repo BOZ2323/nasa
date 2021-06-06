@@ -19,13 +19,13 @@ const StyledText = styled.article`
   color: grey;
 `;
 
-const DailySpacePic = ({ data }) => {
-  console.log("data in DailySpacePic", data);
+const DailySpacePic = ({ dailyData }) => {
+  console.log("data in DailySpacePic", dailyData);
   return (
     <StyledWrapper>
-      <StyledText>{data.explanation}</StyledText>
+      <StyledText>{dailyData.explanation}</StyledText>
       <StyledBox>
-        <StyledImage src={data.hdurl} alt={data.explanation} />
+        <StyledImage src={dailyData.hdurl} alt={dailyData.explanation} />
       </StyledBox>
     </StyledWrapper>
   );

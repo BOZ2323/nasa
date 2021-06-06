@@ -5,7 +5,7 @@ const StyledWrapper = styled.section`
   display: flex;
 `;
 const StyledBox = styled.div`
-  padding: 2rem;
+  padding: 3.5rem;
 `;
 const StyledImage = styled.img`
   width: 20rem;
@@ -22,7 +22,7 @@ const StyledText = styled.article`
 const LastWeeksPics = ({weekday}) => {
     return (
         <StyledWrapper>
-        <StyledText>{weekday.explanation}</StyledText>
+        <StyledText>{weekday.date}<span>{<br/>}</span>{weekday.explanation}</StyledText>
         <StyledBox>
           <StyledImage src={weekday.hdurl} alt={weekday.explanation} />
         </StyledBox>
