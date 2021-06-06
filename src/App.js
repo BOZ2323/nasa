@@ -37,7 +37,20 @@ function App() {
 
   // get today's date, taking the different timezone into account
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
+
+
+// function getDateWithTimeZone(date){
+//   if (date !== null || undefined){
+//     new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
+//     return
+//   }
+//   return
+// }
+
+// const DATE = getDateWithTimeZone()
+
+
+  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10); // if date === null, getTime() doesn't work
   // const DATE = date.toISOString().substring(0, 10);
   const SEVEN_DAYS_AGO = getAWeekAgoDate().toISOString().substring(0, 10);
   console.log("SEVEN_DAYS_AGO", SEVEN_DAYS_AGO);
@@ -47,7 +60,6 @@ function App() {
   useEffect(() => {
     getDailyData();
     getWeeklyData();
-    // getAWeekAgoDate(); // call this on the button
   }, [date]);
 
   console.log("DATE:", DATE);
@@ -117,6 +129,7 @@ function App() {
         </StyledSection>
         {!showWeeklySpacePic && dailyData && <DailySpacePic dailyData={dailyData} />}
       </StyledMain>
+      
       <BackgroundPic />
     </>
   );

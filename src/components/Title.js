@@ -19,7 +19,7 @@ font-size: 1rem;
 
 const Title = ({showWeeklySpacePic}) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper data-testid="test-2">
       <StyledTitle>NASA</StyledTitle>
       <StyledSubtitle>{showWeeklySpacePic ? "Weekly" : "Daily"}</StyledSubtitle>
     </StyledWrapper>
