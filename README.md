@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Coding Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app fetches and displays data from the NASA API.
 
-## Available Scripts
+## My goal
 
-In the project directory, you can run:
+The app should:
 
-### `yarn start`
+- fetch and display the Astronomy picture of the day
+- fetch and display the picture of the day for a certain date, the user chooses with via date-picker
+- fetch and display a list of seven pictures, starting today, going backwards and being displayed as last weeks pictures of the day
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I started out by sketching this wireframe:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Alt text](public/images/wireframe-sketch.png)
 
-### `yarn test`
+## Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js](https://nodejs.org) version 12 or newer.
+- [yarn](https://yarnpkg.com/) package manager. Version 1.21.0 or newer.
 
-### `yarn build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone or download the repository from the command line
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+git clone git@github.com:bitcrowd/coding_challenge_lilli.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+2. Go to the local directory
 
-### `yarn eject`
+```
+cd coding_challenge_lilli
+```
+3. Install the project dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+yarn install
+```
+4. Run development mode
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+yarn start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Testing
+I use
+- React testing library - for testing React components.
+- React test renderer - Enables snapshot tests.
+```
+yarn run test
+```
+## Linting
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I use [eslint](https://eslint.org/).
+## Code formatter
 
-## Learn More
+I use [prettier](https://prettier.io/) to format the code. It is recommended to use VSCode text editor with [prettier-vscode extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+## Styling
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+I use [styled-components](https://styled-components.com/).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Other third party libraries
+I use [react date-picker](https://github.com/wojtekmaj/react-date-picker)
 
-### Code Splitting
+React-Calendar, on which React-Date-Picker relies heavily, uses modern web technologies. That's why it's so fast, lightweight and easy to style. This, however, comes at a cost of supporting only modern browsers.
+If you need to support legacy browsers like Internet Explorer 10, you will need to use Intl.js or another Intl polyfill along with React-Date-Picker.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Commit messages convention
 
-### Analyzing the Bundle Size
+I use semantic commit messages like this [gist example](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Roadmap
 
-### Making a Progressive Web App
+My future improvements would be:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- improve test coverage.
+- add routing and display more components with NASA data.
+- move date-picker into the DailySpacePics component.
 
-### Advanced Configuration
+## My decisions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- I use fetch, inbuilt JavaScript method, for the API calls.
+- I use styled components for better structured and therefore better readable css.
+- I use the react-date-picker since it's very light-weight and convenient given the time-constraint. But the missing support for legacy browser is a downside and not acceptable for many real-life projects.

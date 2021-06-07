@@ -14,14 +14,22 @@ const StyledMain = styled.main`
   align-items: center;
 `;
 const StyledSection = styled.section`
-  background: lightblue;
+  background: #737e88;
+  border: none;
+`;
+const StyledText = styled.p`
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  padding: 0.4rem;
 `;
 const StyledButton = styled.button`
+  border-radius: 3px;
+  background-color: #f67520;
   color: white;
-  background-color: red;
   padding: 5px;
   border: none;
-  width: 7rem;
+  width: 9.8rem;
   justify-content: center;
   margin: 10px;
 `;
@@ -37,18 +45,6 @@ function App() {
 
   // get today's date, taking the different timezone into account
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-
-
-// function getDateWithTimeZone(date){
-//   if (date !== null || undefined){
-//     new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
-//     return
-//   }
-//   return
-// }
-
-// const DATE = getDateWithTimeZone()
-
 
   const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10); // if date === null, getTime() doesn't work
   // const DATE = date.toISOString().substring(0, 10);
@@ -115,21 +111,25 @@ function App() {
         <Title showWeeklySpacePic={showWeeklySpacePic} />
 
         <StyledButton onClick={() => setShowWeeklySpacePic(!showWeeklySpacePic)}>
-          {showWeeklySpacePic ? "Choose your special date" : "View this weeks pics"}
+          {showWeeklySpacePic ? "Choose your own date" : "See last weeks pictures"}
         </StyledButton>
         {showWeeklySpacePic &&
           weekdays?.map((weekday) => (
             <LastWeeksPics getWeekAgoDate={() => getAWeekAgoDate()} weekday={weekday} key={weekday.title} />
           ))}
 
-        <StyledSection>
-          {!showWeeklySpacePic && (
-            <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />
-          )}
-        </StyledSection>
+        {!showWeeklySpacePic && (
+          <>
+            <StyledText>Choose here a certain date and you will see that date's picture of the day! </StyledText>
+            <StyledSection>
+              <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />
+            </StyledSection>
+          </>
+        )}
+
         {!showWeeklySpacePic && dailyData && <DailySpacePic dailyData={dailyData} />}
       </StyledMain>
-      
+
       <BackgroundPic />
     </>
   );

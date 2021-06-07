@@ -23,7 +23,7 @@ const DailySpacePic = ({ dailyData }) => {
   console.log("data in DailySpacePic", dailyData);
   return (
     <StyledWrapper>
-      <StyledText>{dailyData.explanation}</StyledText>
+      <StyledText>{dailyData.date}<span>{<br/>}</span>{dailyData.explanation}</StyledText>
       <StyledBox>
         <StyledImage src={dailyData.hdurl} alt={dailyData.explanation} />
       </StyledBox>
