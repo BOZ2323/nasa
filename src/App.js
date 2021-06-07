@@ -36,7 +36,7 @@ const StyledButton = styled.button`
 
 const API_KEY = "kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP";
 
-function App() {
+const App = () => {
   const [dailyData, setDailyData] = useState();
   const [date, setDate] = useState(new Date());
 
@@ -47,28 +47,16 @@ function App() {
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
 
   const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10); // if date === null, getTime() doesn't work
-  // const DATE = date.toISOString().substring(0, 10);
   const SEVEN_DAYS_AGO = getAWeekAgoDate().toISOString().substring(0, 10);
-  console.log("SEVEN_DAYS_AGO", SEVEN_DAYS_AGO);
+ 
 
-  console.log("newDate()", new Date());
+  
 
   useEffect(() => {
     getDailyData();
     getWeeklyData();
   }, [date]);
 
-  console.log("DATE:", DATE);
-
-  console.log("date", date);
-  console.log("date.getTime()", date.getTime());
-  console.log("newDate().getTime()", new Date().getTime());
-  console.log("weekdays", weekdays);
-  const reversedWeekdays = weekdays.reverse();
-  console.log("reversedWeekdays", reversedWeekdays.reverse());
-
-  // console.log(date.toISOString())
-  // console.log(date.toISOString().substring(0, 10)) // not giving the correct date yet
 
   function getAWeekAgoDate() {
     const today = new Date(new Date().getTime() - tzoffset);
@@ -81,8 +69,6 @@ function App() {
     try {
       const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${DATE}`);
       const data = await response.json();
-
-      console.log("daily response", data);
       setDailyData(data);
     } catch {
       console.log("API request for daily pics failed");
@@ -95,10 +81,7 @@ function App() {
         `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${SEVEN_DAYS_AGO}`
       );
       const data = await response.json();
-
       const reversedData = data.reverse();
-      console.log("reversedData", reversedData);
-
       setWeekdays(reversedData);
     } catch {
       console.log("API request for weekly pics failed");
@@ -122,7 +105,7 @@ function App() {
           <>
             <StyledText>Choose here a certain date and you will see that date's picture of the day! </StyledText>
             <StyledSection>
-              <DatePicker minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} />
+              <DatePicker dayAriaLabel="Day" minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} clearIcon={null}/>
             </StyledSection>
           </>
         )}
