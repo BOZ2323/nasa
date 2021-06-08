@@ -3,9 +3,11 @@ import styled from "styled-components";
 
 const StyledWrapper = styled.section`
   display: flex;
+  
 `;
 const StyledBox = styled.div`
   padding: 2rem;
+}
 `;
 const StyledImage = styled.img`
   width: 60rem;
@@ -17,10 +19,13 @@ const StyledText = styled.article`
   width: 30rem;
   padding: 2rem;
   color: grey;
+  @media only screen and (min-width: 768px) {
+    width: 20rem;
+  }
 `;
 
 const DailySpacePic = ({ dailyData }) => {
-  console.log("data in DailySpacePic", dailyData);
+
   return (
     <StyledWrapper>
       <StyledText>{dailyData.date}<span>{<br/>}</span>{dailyData.explanation}</StyledText>

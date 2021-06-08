@@ -36,6 +36,8 @@ const StyledButton = styled.button`
 
 const API_KEY = "kJf4F8gQTewDqd17XKGl4oHuXMu5QC6i0ecPYWCP";
 
+
+
 const App = () => {
   const [dailyData, setDailyData] = useState();
   const [date, setDate] = useState(new Date());
@@ -46,22 +48,17 @@ const App = () => {
   // get today's date, taking the different timezone into account
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
 
-  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10); // if date === null, getTime() doesn't work
+  const DATE = new Date(date.getTime() - tzoffset).toISOString().substring(0, 10);
   const SEVEN_DAYS_AGO = getAWeekAgoDate().toISOString().substring(0, 10);
- 
-
-  
 
   useEffect(() => {
     getDailyData();
     getWeeklyData();
   }, [date]);
 
-
   function getAWeekAgoDate() {
     const today = new Date(new Date().getTime() - tzoffset);
-    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5); // why 5, figure out before uploading
-    console.log("today", today);
+    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
     return lastWeek;
   }
 
@@ -105,7 +102,14 @@ const App = () => {
           <>
             <StyledText>Choose here a certain date and you will see that date's picture of the day! </StyledText>
             <StyledSection>
-              <DatePicker dayAriaLabel="Day" minDate={new Date(1995, 5, 16)} maxDate={new Date()} onChange={setDate} value={date} clearIcon={null}/>
+              <DatePicker
+                dayAriaLabel="Day"
+                minDate={new Date(1995, 5, 16)}
+                maxDate={new Date()}
+                onChange={setDate}
+                value={date}
+                clearIcon={null}
+              />
             </StyledSection>
           </>
         )}
@@ -116,6 +120,6 @@ const App = () => {
       <BackgroundPic />
     </>
   );
-}
+};
 
 export default App;

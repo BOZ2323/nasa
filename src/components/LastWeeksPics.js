@@ -20,6 +20,7 @@ const StyledText = styled.article`
 `;
 
 const LastWeeksPics = ({weekday}) => {
+    
     return (
         <StyledWrapper>
         <StyledText>{weekday.date}<span>{<br/>}</span>{weekday.explanation}</StyledText>
