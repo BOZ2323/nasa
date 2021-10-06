@@ -3,7 +3,7 @@
 exports[`matches snapshot 1`] = `
 Array [
   <main
-    className="sc-crzoAE gFQFOS"
+    className="sc-iqAclL ffNEnI"
   >
     <section
       className="sc-bdnxRM iaMMfV"
@@ -21,18 +21,18 @@ Array [
       </h1>
     </section>
     <button
-      className="sc-ksluID jZlcEQ"
+      className="sc-bqGGPW eqnbAc"
       onClick={[Function]}
     >
       See last weeks pictures
     </button>
     <p
-      className="sc-bqGGPW fHJAPV"
+      className="sc-dIsUp iAHDsu"
     >
       Choose here a certain date and you will see that date's picture of the day! 
     </p>
     <section
-      className="sc-dIsUp fhjiNM"
+      className="sc-crzoAE fJQpxT"
     >
       <div
         className="react-date-picker react-date-picker--closed react-date-picker--enabled"
@@ -46,7 +46,7 @@ Array [
             onClick={[Function]}
           >
             <input
-              max="2021-06-07"
+              max="2021-10-06"
               min="1995-06-16"
               name="date"
               onChange={[Function]}
@@ -59,7 +59,7 @@ Array [
                 }
               }
               type="date"
-              value="2021-06-07"
+              value="2021-10-06"
             />
             
             <input
@@ -67,7 +67,7 @@ Array [
               className="react-date-picker__inputGroup__input react-date-picker__inputGroup__month"
               data-input="true"
               inputMode="numeric"
-              max={6}
+              max={10}
               min={1}
               name="month"
               onChange={[Function]}
@@ -78,7 +78,7 @@ Array [
               placeholder="--"
               required={null}
               type="number"
-              value="6"
+              value="10"
             />
             <span
               className="react-date-picker__inputGroup__divider"
@@ -86,12 +86,13 @@ Array [
               /
             </span>
             <input
+              aria-label="Day"
               autoComplete="off"
               autoFocus={false}
               className="react-date-picker__inputGroup__input react-date-picker__inputGroup__day"
               data-input="true"
               inputMode="numeric"
-              max={7}
+              max={6}
               min={1}
               name="day"
               onChange={[Function]}
@@ -102,7 +103,7 @@ Array [
               placeholder="--"
               required={null}
               type="number"
-              value="7"
+              value="6"
             />
             <span
               className="react-date-picker__inputGroup__divider"
@@ -204,7 +205,7 @@ Array [
     className="sc-hKFxyN jLOHUB"
   >
     <img
-      alt="Illustration of Astronaut in Space"
+      alt="Cartoon character of Astronaut in Space"
       src="http://images.all-free-download.com/images/graphiclarge/space_background_astronaut_spaceship_flag_icons_ornament_6828811.jpg"
     />
   </section>,

@@ -7,7 +7,6 @@ import styled from "styled-components";
 import DatePicker from "react-date-picker";
 import LastWeeksPics from "./components/LastWeeksPics";
 
-
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
@@ -64,20 +63,17 @@ const App = () => {
   console.log("DATE", DATE);
 
   useEffect(() => {
-      GetDailyData();
-      getWeeklyData();
+    getDailyData();
+    getWeeklyData();
   }, [date]);
 
   function getAWeekAgoDate() {
-    const today = new Date();
-    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
-    console.log("today.getFullYear()", today.getFullYear(), today.getMonth(), today.getDate())
-    console.log("last week", lastWeek)
-
+    const today = new Date(new Date().getTime() - tzoffset);
+    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
     return lastWeek;
   }
 
-  const GetDailyData = async () => {
+  const getDailyData = async () => {
     try {
       const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${DATE}`);
       // const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
@@ -102,17 +98,6 @@ const App = () => {
     }
   };
 
-  // this is needed, because ClearIcon sets date to null, if clicked.
-  const onDateChange = (date) => {
-    if (date) {
-      setDate(date)
-    }
-    else {
-      setDate(new Date())    
-    }
-
-  }
-
   return (
     <>
       <StyledMain>
@@ -134,7 +119,7 @@ const App = () => {
                 dayAriaLabel="Day"
                 minDate={new Date(1995, 5, 16)}
                 maxDate={new Date()}
-                onChange={onDateChange}
+                onChange={setDate}
                 value={date}
               />
             </StyledSection>
