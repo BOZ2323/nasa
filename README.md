@@ -1,4 +1,4 @@
-# Coding Challenge
+# Side Project
 
 This app fetches and displays data from the NASA API.
 
